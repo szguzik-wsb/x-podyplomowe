@@ -1,0 +1,44 @@
+{% extends "MojaAplikacjaGlowna/base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="fw-bold">{{ post.title }}</h2>
+        <h6 class="text-muted">{{ post.created_at|date:"d.m.Y H:i" }}</h6>
+
+        <!-- Statystyki -->
+        <div class="text-muted mb-3">
+            👀 {{ post.views }} wyświetleń | 👍 <span id="likes-{{ post.id }}">{{ post.likes }}</span> polubień
+        </div>
+
+        <p>{{ post.content }}</p>
+
+        <!-- Przyciski akcji (usunięto Edytuj i Usuń) -->
+
+        <!-- Przyciski wyrównane do lewej -->
+        <div class="d-flex gap-2 mt-3">
+            <button class="btn btn-success like-button" data-post-id="{{ post.id }}">
+                Lubię to
+            </button>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Powrót</a>
+        </div>
+
+    </div>
+{% endblock %}
+
+<!-- Fetch do polubień -->
+{% block extra_scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector(".like-button").addEventListener("click", function() {
+        let postId = this.getAttribute("data-post-id");
+        fetch(`/like/${postId}/`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById(`likes-${postId}`).innerText = data.likes;
+            });
+    });
+});
+</script>
+{% endblock %}

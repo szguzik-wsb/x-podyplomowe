@@ -1,0 +1,43 @@
+{% extends "MojaAplikacjaGlowna/base.html" %}
+
+{% block title %}Lista postów{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="mb-4">Lista postów</h2>
+
+        {% if posts %}
+          {% for post in posts %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <!-- Nagłówek posta -->
+                    <h4 class="fw-bold mb-2">
+                        <a href="{% url 'post_detail' post.id %}" class="text-decoration-none text-dark">
+                            {{ post.title }}
+                        </a>
+                    </h4>
+                    <h6 class="text-muted">{{ post.created_at|date:"d.m.Y H:i" }}</h6>
+
+                    <p class="card-text mt-2">{{ post.content|truncatechars:100 }}</p>  <!-- Skrócony tekst posta -->
+
+                    <!-- Statystyki i przyciski akcji -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="text-muted">
+                            👀 {{ post.views }} wyświetleń |
+                            👍 <span id="likes-{{ post.id }}">{{ post.likes }}</span> polubień
+                        </div>
+                        <div class="d-flex gap-2">
+                            <a href="{% url 'edit_post' post.id %}" class="btn btn-primary btn-sm">Edytuj</a>
+                            <a href="{% url 'delete_post' post.id %}" class="btn btn-danger btn-sm">Usuń</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        {% else %}
+            <p class="text-muted">Brak postów do wyświetlenia.</p>
+        {% endif %}
+    </div>
+{% endblock %}
+

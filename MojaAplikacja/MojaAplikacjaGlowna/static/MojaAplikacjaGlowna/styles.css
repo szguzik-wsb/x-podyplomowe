@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h2 {
+    color: #333;
+}
+
+.d-flex button,
+.d-flex a {
+    height: 40px;  /* Ustawienie tej samej wysokości */
+    line-height: 40px; /* Wyrównanie tekstu w pionie */
+    padding: 0px 15px;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;  /* Wycentrowanie formularza */
+}
+h4 {
+    margin-bottom: 5px; /* Mniejszy odstęp pod tytułem */
+}
+
+.card-body {
+    padding: 15px; /* Lepsze dopasowanie do treści */
+}
+
+.card-text {
+    margin-bottom: 10px;
+}
+.btn-success {
+    background-color: #28a745; /* Bootstrapowy zielony */
+    border-color: #28a745;
+    color: white;
+    font-weight: bold;
+}

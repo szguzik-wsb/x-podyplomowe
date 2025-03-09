@@ -1,0 +1,29 @@
+{% extends "MojaAplikacjaGlowna/base.html" %}
+
+{% block title %}Nowy post{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="mb-4">Dodaj nowy post</h2>
+
+        <form method="POST" class="needs-validation" novalidate>
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="id_title" class="form-label">Tytuł</label>
+                <input type="text" name="title" id="id_title" class="form-control" value="{{ form.title.value|default_if_none:'' }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="id_content" class="form-label">Treść</label>
+                <textarea name="content" id="id_content" class="form-control">{{ form.content.value|default_if_none:'' }}</textarea>
+            </div>
+
+            <div class="d-flex gap-2 mt-3">
+                <button type="submit" class="btn btn-success">Zapisz</button>
+                <a href="{% url 'home' %}" class="btn btn-secondary">Anuluj</a>
+            </div>
+
+        </form>
+    </div>
+{% endblock %}
